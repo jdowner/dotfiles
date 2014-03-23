@@ -1,0 +1,79 @@
+---------------------------
+-- Default awesome theme --
+---------------------------
+theme = {}
+theme.confdir       = awful.util.getdir("config")
+
+theme.font          = "sans bold 6.5"
+theme.bg_normal     = "#222200"
+theme.bg_focus      = "#474739"
+theme.bg_urgent     = "#8b0000"
+--theme.bg_sbfocus    = "#222200"
+--theme.bg_minimize   = "#222200"
+
+theme.fg_normal     = "#f5deb3"
+theme.fg_focus      = "#ffa500"
+theme.fg_urgent     = "#ffff00"
+--theme.fg_minimize   = "#222200"
+
+theme.border_width  = "1"
+theme.border_normal = "#2f4f4f"
+theme.border_focus  = "#ffa500"
+theme.border_marked = "#8b0000"
+
+-- There are another variables sets
+-- overriding the default one when
+-- defined, the sets are:
+-- [taglist|tasklist]_[bg|fg]_[focus|urgent]
+-- titlebar_[bg|fg]_[normal|focus]
+-- Example:
+--taglist_bg_focus = "#ff0000"
+
+-- Display the taglist squares
+--taglist_squares_sel = theme.confdir .. "/themes/icons/taglist/squarefw.png"
+--taglist_squares_unsel = theme.confdir .. "/themes/icons/taglist/squarew.png"
+
+--tasklist_floating_icon = theme.confdir .. "/themes/icons/tasklist/floatingw.png"
+
+-- Variables set for theming menu
+-- menu_[bg|fg]_[normal|focus]
+-- menu_[border_color|border_width]
+--menu_submenu_icon = theme.confdir .. "/themes/icons/submenu.png"
+--menu_height   = "15"
+--menu_width    = "100"
+
+-- You can add as many variables as
+-- you wish and access them by using
+-- beautiful.variable in your rc.lua
+--bg_widget    = "#cc0000"
+
+-- Define the image to load
+--titlebar_close_button_normal = theme.confdir .. "/themes/icons/titlebar/close.png"
+--titlebar_close_button_focus = theme.confdir .. "/themes/icons/titlebar/closer.png"
+
+-- You can use your own command to set your wallpaper
+--wallpaper_cmd = "awsetbg theme.confdir .. /themes/icons/background.png"
+
+-- You can use your own layout icons like this:
+theme.layout_fairh      = theme.confdir .. "/themes/icons/layouts/fairhw.png"
+theme.layout_fairv      = theme.confdir .. "/themes/icons/layouts/fairvw.png"
+theme.layout_floating   = theme.confdir .. "/themes/icons/layouts/floatingw.png"
+theme.layout_magnifier  = theme.confdir .. "/themes/icons/layouts/magnifierw.png"
+theme.layout_max        = theme.confdir .. "/themes/icons/layouts/maxw.png"
+theme.layout_tilebottom = theme.confdir .. "/themes/icons/layouts/tilebottomw.png"
+theme.layout_tileleft   = theme.confdir .. "/themes/icons/layouts/tileleftw.png"
+theme.layout_tile       = theme.confdir .. "/themes/icons/layouts/tilew.png"
+theme.layout_tiletop    = theme.confdir .. "/themes/icons/layouts/tiletopw.png"
+
+theme.awesome_icon      = "/usr/share/icons/awesome16.png"
+
+theme.widget_sep        = theme.confdir .. "/themes/icons/widgets/sep.png"
+theme.widget_cpu        = theme.confdir .. "/themes/icons/widgets/cpu.png"
+theme.widget_bat        = theme.confdir .. "/themes/icons/widgets/bat.png"
+theme.widget_mem        = theme.confdir .. "/themes/icons/widgets/mem.png"
+theme.widget_wifi       = theme.confdir .. "/themes/icons/widgets/wifi.png"
+theme.widget_up         = theme.confdir .. "/themes/icons/widgets/up.png"
+theme.widget_down       = theme.confdir .. "/themes/icons/widgets/down.png"
+
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:encoding=utf-8:textwidth=80
+return theme

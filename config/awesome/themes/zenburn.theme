@@ -1,0 +1,43 @@
+theme = {}
+theme.confdir       = awful.util.getdir("config")
+
+theme.wallpaper_cmd = {"awsetbg /home/jdowner/.config/awesome/images/fringe_gray_arm.png"}
+
+theme.font          = "sans bold 6.5"
+theme.bg_normal     = "#3F3F3F"
+theme.bg_focus      = "#1E2320"
+theme.bg_urgent     = "#3F3F3F"
+
+theme.fg_normal     = "#DCDCCC"
+theme.fg_focus      = "#F0DFAF"
+theme.fg_urgent     = "#CC9393"
+
+theme.border_width  = "1"
+theme.border_normal = "#3F3F3F"
+theme.border_focus  = "#8FAF9F"
+theme.border_marked = "#CC9393"
+
+-- You can use your own layout icons like this:
+theme.layout_fairh      = theme.confdir .. "/themes/icons/layouts/fairhw.png"
+theme.layout_fairv      = theme.confdir .. "/themes/icons/layouts/fairvw.png"
+theme.layout_floating   = theme.confdir .. "/themes/icons/layouts/floatingw.png"
+theme.layout_magnifier  = theme.confdir .. "/themes/icons/layouts/magnifierw.png"
+theme.layout_max        = theme.confdir .. "/themes/icons/layouts/maxw.png"
+theme.layout_tilebottom = theme.confdir .. "/themes/icons/layouts/tilebottomw.png"
+theme.layout_tileleft   = theme.confdir .. "/themes/icons/layouts/tileleftw.png"
+theme.layout_tile       = theme.confdir .. "/themes/icons/layouts/tilew.png"
+theme.layout_tiletop    = theme.confdir .. "/themes/icons/layouts/tiletopw.png"
+
+theme.awesome_icon      = "/usr/share/icons/awesome16.png"
+
+theme.widget_sep        = theme.confdir .. "/themes/icons/widgets/sep.png"
+theme.widget_cpu        = theme.confdir .. "/themes/icons/widgets/cpu.png"
+theme.widget_bat        = theme.confdir .. "/themes/icons/widgets/bat.png"
+theme.widget_mem        = theme.confdir .. "/themes/icons/widgets/mem.png"
+theme.widget_wifi       = theme.confdir .. "/themes/icons/widgets/wifi.png"
+theme.widget_up         = theme.confdir .. "/themes/icons/widgets/up.png"
+theme.widget_down       = theme.confdir .. "/themes/icons/widgets/down.png"
+
+return theme
+
+-- vim: filetype=lua
