@@ -3,6 +3,7 @@ source /etc/profile
 
 export LANG=en_US.utf8
 
+xrdb -merge .Xresources &
 
 if [ -x /usr/bin/urxvtd -a -z "$(pidof urxvtd)" ]; then
     urxvtd -q -f -o
