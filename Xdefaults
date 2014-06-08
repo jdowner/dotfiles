@@ -3,8 +3,8 @@ Xft*antialias: true
 urxvt*scrollBar: false
 urxvt*saveLines: 5000
 urxvt*loginShell: true
-urxvt*font:xft:DejaVu Sans Mono:pixelsize=11
-urxvt*boldFont:xft:DejaVu Sans Mono:pixelsize=11
+urxvt*font:xft:DejaVu Sans Mono:pixelsize=14
+urxvt*boldFont:xft:DejaVu Sans Mono:pixelsize=14
 urxvt*scrollKeypress: true
 urxvt*inheritPixmap: false
 urxvt*reverseVideo:false
@@ -20,7 +20,7 @@ urxvt*mouseWheelScrollPage:false
 urxvt*fading:0
 
 ! Launch urls.
-urxvt.perl-ext: default,matcher
+urxvt.perl-ext: matcher
 urxvt.urlLauncher: firefox-multidisplay
 urxvt.matcher.button: 1
 
@@ -44,7 +44,7 @@ urxvt.matcher.button: 1
 *color11: #fff796
 # blue
 *color4: #4E78A0
-*color12: #4186be
+color12: #4186be
 # magenta
 *color5: #963c59
 *color13: #cf9ebe
