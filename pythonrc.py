@@ -22,10 +22,6 @@ from code import InteractiveConsole
 
 # Imports we want
 import datetime
-import matplotlib.pyplot as pl
-import numpy
-
-pl.ion()
 
 # enable syntax completion
 readline.parse_and_bind("tab: complete")
