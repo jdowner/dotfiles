@@ -1,0 +1,12 @@
+[alias]
+  st = status
+  summary = !git log $(git log -1 --merges --pretty=format:%H)..HEAD --oneline
+  modified = !sh -c 'git diff --name-only $(git merge-base master HEAD)'
+[color]
+	ui = auto
+[branch]
+	autosetuprebase = always
+[diff]
+	algorithm = patience
+[push]
+	default = simple
