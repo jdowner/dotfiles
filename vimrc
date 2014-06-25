@@ -44,6 +44,9 @@ let g:journal_directory="~/.journal"
 " This opens up a list of the current buffers for easy selection
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
+" No ex mode
+nnoremap Q <Nop>
+
 " Remove highlighting
 nmap <F12> :noh<CR>
 
