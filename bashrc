@@ -17,9 +17,11 @@ function prepend_to_path(){
 [ -z "$PS1" ] && return
 
 # start up keychain
-keychain ~/.ssh/id_rsa
-. ~/.keychain/${HOSTNAME}-sh
-. ~/.keychain/${HOSTNAME}-sh-gpg
+if [[ -n $(command -v keychain) ]]; then
+  keychain ~/.ssh/id_rsa
+  source ~/.keychain/${HOSTNAME}-sh
+  source ~/.keychain/${HOSTNAME}-sh-gpg
+fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
