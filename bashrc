@@ -153,7 +153,11 @@ if [ -f ~/.git-prompt.sh ]; then
   source ~/.git-prompt.sh
 fi
 
-PS1="$Green\u@\h:\W$Yellow\$(__git_ps1)$White\$ "
+if [ -z "${SSH_CLIENT}" ]; then
+  PS1="$Green\u@\h:\W$Yellow\$(__git_ps1)$White\$ "
+else
+  PS1="$Purple[\u@\h]:\W$Yellow\$(__git_ps1)$White\$ "
+fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
