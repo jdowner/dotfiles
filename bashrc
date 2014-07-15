@@ -183,11 +183,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# Starup the urxvt daemon
-if [ -x /etc/bin/urxvtd -a -z "$(pidof urxvtd)" ]; then
-  urxvtd -q -f -o
-fi
-
 # Define environment variables
 export EDITOR='vim'
 export VISUAL='vim'
