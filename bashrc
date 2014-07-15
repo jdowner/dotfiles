@@ -2,6 +2,17 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+function prepend_to_path(){
+  for p in $1;
+  do
+    case ":${PATH}:" in
+      *":$p:"*) :;; # already there
+      *) PATH="$p:${PATH}";;
+    esac
+  done
+  echo ${PATH}
+}
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
