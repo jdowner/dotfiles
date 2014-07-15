@@ -146,6 +146,11 @@ On_IPurple="\[\033[10;95m\]"  # Purple
 On_ICyan="\[\033[0;106m\]"    # Cyan
 On_IWhite="\[\033[0;107m\]"   # White
 
+# ensure that the git prompt is available
+if [ -f ~/.git-prompt.sh ]; then
+  source ~/.git-prompt.sh
+fi
+
 PS1="$Green\u@\h:\W$Yellow\$(__git_ps1)$White\$ "
 
 # If this is an xterm set the title to user@host:dir
