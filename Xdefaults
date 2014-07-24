@@ -44,7 +44,7 @@ urxvt.matcher.button: 1
 *color11: #fff796
 # blue
 *color4: #4E78A0
-color12: #4186be
+*color12: #4186be
 # magenta
 *color5: #963c59
 *color13: #cf9ebe
