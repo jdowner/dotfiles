@@ -32,6 +32,10 @@ au FileType python setl sw=4 sts=4 et
 
 set wildignore+=*.pyc
 
+" Custom nerdtree settings
+nnoremap \nto :NERDtree<CR>
+nnoremap \ntc :NERDtreeClose<CR>
+
 " Custom setting for ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPLastMode'
