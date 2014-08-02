@@ -63,20 +63,22 @@ local function worker(format, warg)
         return {state, percent, "N/A"}
     end
 
-    -- Calculate remaining (charging or discharging) time
-    local time = "N/A"
-    if rate ~= nil then
-        if state == "+" then
-            timeleft = (tonumber(capacity) - tonumber(remaining)) / tonumber(rate)
-        elseif state == "-" then
-            timeleft = tonumber(remaining) / tonumber(rate)
-        else
-            return {state, percent, time}
-        end
-        local hoursleft = math.floor(timeleft)
-        local minutesleft = math.floor((timeleft - hoursleft) * 60 )
-        time = string.format("%02d:%02d", hoursleft, minutesleft)
+    -- Check that it is possible to get the charge rate of change
+    if not tonumber(rate) or rate <= 0 then
+        return {state, percent, "--:--"}
     end
+
+    -- Calculate remaining (charging or discharging) time
+    if state == "+" then
+        timeleft = (tonumber(capacity) - tonumber(remaining)) / tonumber(rate)
+    elseif state == "-" then
+        timeleft = tonumber(remaining) / tonumber(rate)
+    else
+        return {state, percent, time}
+    end
+    local hoursleft = math.floor(timeleft)
+    local minutesleft = math.floor((timeleft - hoursleft) * 60 )
+    time = string.format("%02d:%02d", hoursleft, minutesleft)
 
     return {state, percent, time}
 end
