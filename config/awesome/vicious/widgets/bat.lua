@@ -53,19 +53,16 @@ local function worker(format, warg)
     -- Calculate percentage (but work around broken BAT/ACPI implementations)
     local percent = math.min(math.floor(remaining / capacity * 100), 100)
 
-
     -- Get charge information
     if battery.current_now then
         rate = battery.current_now
     elseif battery.power_now then
         rate = battery.power_now
-    else
-        return {state, percent, "N/A"}
     end
 
-    -- Check that it is possible to get the charge rate of change
-    if not tonumber(rate) or rate <= 0 then
-        return {state, percent, "--:--"}
+    -- If the rate cannot be determined, just return what is known
+    if not rate or not tonumber(rate) or tonumber(rate) <= 0 then
+        return {state, percent, ""}
     end
 
     -- Calculate remaining (charging or discharging) time
@@ -74,7 +71,7 @@ local function worker(format, warg)
     elseif state == "-" then
         timeleft = tonumber(remaining) / tonumber(rate)
     else
-        return {state, percent, time}
+        return {state, percent, ""}
     end
     local hoursleft = math.floor(timeleft)
     local minutesleft = math.floor((timeleft - hoursleft) * 60 )
