@@ -17,6 +17,7 @@ set autowriteall
 set nobackup
 set noswapfile
 set nocompatible
+set nowrap
 set modeline
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 syntax on
@@ -36,10 +37,24 @@ set wildignore+=*.pyc
 nnoremap \nto :NERDtree<CR>
 nnoremap \ntc :NERDtreeClose<CR>
 
+" PyMatcher for CtrlP
+if !has('python')
+  echo 'In order to use pymatcher plugin, you need +python compiled vim'
+else
+  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+endif
+
 " Custom setting for ctrlp
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPLastMode'
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_custom_ignore='\v(3rdparty|build)/'
+let g:ctrlp_lazy_update = 350
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_max_files = 0
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --hidden -g ""'
+endif
 
 " Journal settings
 nmap \jj :JournalToggle<CR>
