@@ -153,6 +153,18 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
         self.last_buffer = [ source ]
         return InteractiveConsole.runsource(self, source, *args)
 
+    def column_print(self, data):
+        _, cols = os.popen('stty size', 'r').read().split()
+        width = max(len(r) for r in data) + 1
+        cols = max(1, int(cols) / width)
+        fmt = '{0:%ds}' % width
+        while data:
+            for name in data[:cols]:
+                sys.stdout.write(fmt.format(name))
+            data = data[cols:]
+            sys.stdout.write('\n')
+        sys.stdout.write('\n')
+
     def raw_input(self, *args):
         line = InteractiveConsole.raw_input(self, *args)
         if line == EDIT_CMD:
@@ -164,19 +176,29 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
             os.unlink(tmpfl)
             tmpfl = ''
             lines = line.split( '\n' )
-            for i in range(len(lines) - 1): self.push( lines[i] )
+            for i in range(len(lines) - 1):
+                self.push( lines[i] )
             line = lines[-1]
         elif line == 'ls':
-            print(os.listdir(os.getcwd()))
-            line = ''
+            try:
+                self.column_print(os.listdir(os.getcwd()))
+            finally:
+                line = ''
+        elif line.startswith('ls '):
+            try:
+                self.column_print(glob.glob(line[3:]))
+            finally:
+                line = ''
         elif line.startswith('cd '):
-            path = line[3:]
-            paths = glob.glob(line[3:])
-            if len(paths) > 1:
-                print(' '.join(paths))
-            elif len(paths) == 1:
-                os.chdir(os.path.expanduser(paths[0]))
-            line = ''
+            try:
+                path = line[3:]
+                paths = glob.glob(line[3:])
+                if len(paths) > 1:
+                    print(' '.join(paths))
+                elif len(paths) == 1:
+                    os.chdir(os.path.expanduser(paths[0]))
+            finally:
+                line = ''
         elif line == 'pwd':
             print(os.getcwd())
             line = ''
