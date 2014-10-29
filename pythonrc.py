@@ -191,12 +191,11 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
                 line = ''
         elif line.startswith('cd '):
             try:
-                path = line[3:]
-                paths = glob.glob(line[3:])
-                if len(paths) > 1:
-                    print(' '.join(paths))
-                elif len(paths) == 1:
-                    os.chdir(os.path.expanduser(paths[0]))
+                path = os.path.expanduser(line[3:])
+                paths = glob.glob(path)
+                if paths:
+                    os.chdir(paths[0])
+                print(os.path.abspath(os.getcwd()))
             finally:
                 line = ''
         elif line == 'pwd':
