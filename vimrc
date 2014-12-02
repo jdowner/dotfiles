@@ -56,6 +56,36 @@ if executable("ag")
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --hidden -g ""'
 endif
 
+
+""""""""""""""""""""
+" GnuPG Extensions "
+""""""""""""""""""""
+
+" Tell the GnuPG plugin to armor new files.
+let g:GPGPreferArmor=1
+
+" Tell the GnuPG plugin to sign new files.
+let g:GPGPreferSign=1
+
+augroup GnuPGExtra
+" Set extra file options.
+    autocmd BufReadCmd,FileReadCmd *.\(gpg\|asc\|pgp\) call SetGPGOptions()
+" Automatically close unmodified files after inactivity.
+    autocmd CursorHold *.\(gpg\|asc\|pgp\) quit
+augroup END
+
+function SetGPGOptions()
+" Set updatetime to 1 minute.
+    set updatetime=60000
+" Fold at markers.
+    set foldmethod=marker
+" Automatically close all folds.
+    set foldclose=all
+" Only open folds with insert commands.
+    set foldopen=insert
+endfunction
+
+
 " Journal settings
 nmap \jj :JournalToggle<CR>
 let g:journal_directory="~/.journal"
