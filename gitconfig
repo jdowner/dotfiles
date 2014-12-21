@@ -10,3 +10,6 @@
 	algorithm = patience
 [push]
 	default = simple
+[user]
+	email = joshua.downer@gmail.com
+	name = Joshua Downer
