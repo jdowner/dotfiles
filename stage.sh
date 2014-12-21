@@ -51,7 +51,7 @@ cd ${curdir}
 
 # copy the deploy script to the staging area and add a .gitignore
 echo "#!/bin/bash" > ${staging}/deploy.sh
-echo "rsync -avc --exclude '.git*' --exclude 'deploy.sh' . ${target}" >> ${staging}/deploy.sh
+echo "rsync -avc --exclude '.git/' --exclude 'deploy.sh' . ${target}" >> ${staging}/deploy.sh
 chmod +x ${staging}/deploy.sh
 echo deploy.sh >> ${staging}/.gitignore
 
