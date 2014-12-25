@@ -33,9 +33,12 @@ au FileType python setl sw=4 sts=4 et
 
 set wildignore+=*.pyc
 
+
 " Custom nerdtree settings
-nnoremap \nto :NERDtree<CR>
-nnoremap \ntc :NERDtreeClose<CR>
+nnoremap <F8> :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.pyc']
+let NERDTreeQuitOnOpen=1
+
 
 " PyMatcher for CtrlP
 if !has('python')
