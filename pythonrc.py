@@ -181,12 +181,14 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
             line = lines[-1]
         elif line == 'ls':
             try:
-                self.column_print(os.listdir(os.getcwd()))
+                data = sorted(os.listdir(os.getcwd()))
+                self.column_print(data)
             finally:
                 line = ''
         elif line.startswith('ls '):
             try:
-                self.column_print(glob.glob(line[3:]))
+                data = sorted(glob.glob(line[3:]))
+                self.column_print(data)
             finally:
                 line = ''
         elif line.startswith('cd '):
