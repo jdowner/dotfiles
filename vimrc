@@ -1,6 +1,8 @@
 call pathogen#infect()
+call pathogen#helptags()
 
 set textwidth=80
+set colorcolumn=80
 set expandtab
 set tabstop=2
 set autoindent
@@ -22,16 +24,22 @@ set modeline
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 syntax on
 filetype plugin indent on
+set wildignore+=*.pyc
 
-" let g:solarized_termcolors=256
-
-" set background=dark
-" colorscheme solarized
-colorscheme reburn
-
+au BufRead,BufNewFile *.cpp set tabstop=4
+au BufRead,BufNewFile *.cpp set shiftwidth=4
+au BufRead,BufNewFile *.hpp set tabstop=4
+au BufRead,BufNewFile *.hpp set shiftwidth=4
 au FileType python setl sw=4 sts=4 et
 
-set wildignore+=*.pyc
+let python_no_builtin_highlight = 1
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+colorscheme reburn
 
 " pyflake8
 hi clear PyFlakes
@@ -43,28 +51,34 @@ let NERDTreeIgnore=['\.pyc']
 let NERDTreeQuitOnOpen=1
 
 " PyMatcher for CtrlP
-if !has('python')
-  echo 'In order to use pymatcher plugin, you need +python compiled vim'
-else
-  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-endif
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Custom setting for ctrlp
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_custom_ignore='\v(3rdparty|build)/'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore='\v\.(git|install|build)/'
 let g:ctrlp_lazy_update = 350
-let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_max_files = 0
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files . -co --exclude-standard'],
+    \ },
+  \ 'fallback': 'find %s -type f'
+  \ }
+
 if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --hidden -g ""'
+  " let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --hidden -g ""'
 endif
 
 
 """"""""""""""""""""
 " GnuPG Extensions "
 """"""""""""""""""""
+
+let g:GPGDefaultRecipients=['Joshua Downer']
 
 " Tell the GnuPG plugin to armor new files.
 let g:GPGPreferArmor=1
@@ -94,9 +108,12 @@ endfunction
 " Journal settings
 nmap \jj :JournalToggle<CR>
 let g:journal_directory="~/.journal"
+let g:journal_encrypted=1
 
 " This opens up a list of the current buffers for easy selection
 nnoremap <F5> :buffers<CR>:buffer<Space>
+
+nmap \qq :e #<CR>
 
 " No ex mode
 nnoremap Q <Nop>
@@ -109,6 +126,10 @@ nmap \cc :s/^/\/\/<CR>:noh<CR>
 nmap \cx :s/^\/\//<CR>:noh<CR>
 vmap \cc :s/^/\/\/<CR>:noh<CR>
 vmap \cx :s/^\/\//<CR>:noh<CR>
+
+" Remove trailing whitespace
+nmap \wc :%s/\s*$//<CR>:noh<CR>
+vmap \wc :s/\s*$//<CR>:noh<CR>
 
 " Toggle line numbers
 nnoremap \nn :set nonumber!<CR>
@@ -131,21 +152,25 @@ endif
 " Show trailing whitespace:
 :match ExtraWhitespace /\s\+\%#\@<!$/
 
+" neovim specific
+if has('nvim')
+    tnoremap <A-n> <C-\><C-n>
 
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+    tnoremap <A-h> <C-\><C-n><C-w>h
+    tnoremap <A-j> <C-\><C-n><C-w>j
+    tnoremap <A-k> <C-\><C-n><C-w>k
+    tnoremap <A-l> <C-\><C-n><C-w>l
+    nnoremap <A-h> <C-w>h
+    nnoremap <A-j> <C-w>j
+    nnoremap <A-k> <C-w>k
+    nnoremap <A-l> <C-w>l
+endif
 
-" Bi-directional find motion
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap <leader>s <Plug>(easymotion-s)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap <leader>s <Plug>(easymotion-s2)
-
-" Turn on case sensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+" Show syntax highlighting groups for word under cursor
+nmap <leader>z :call SynStack()<CR>
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
